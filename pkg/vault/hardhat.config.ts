@@ -17,4 +17,9 @@ export default {
     overrides: { ...hardhatBaseConfig.overrides(name) },
   },
   warnings: hardhatBaseConfig.warnings,
+  networks: {
+    hardhat: {
+      allowUnlimitedContractSize: true,
+    },
+  },
 };
