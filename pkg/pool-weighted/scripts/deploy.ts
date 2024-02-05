@@ -7,8 +7,8 @@ async function main() {
   // Deploying the CustomToken contract
   const WeightedPoolFactory = await hre.ethers.getContractFactory('WeightedPoolFactory');
   const weightedPoolFactory = await WeightedPoolFactory.deploy(
-    '0x62C9149473fdeE1306847A21c3a9Dfe53726cC1C',
-    '0xa3ABD069778112f3BCF91D591aeE982EAef895bC',
+    '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
+    '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
     BASE_PAUSE_WINDOW_DURATION,
     BASE_BUFFER_PERIOD_DURATION
   );
@@ -47,8 +47,8 @@ async function main() {
     contract: 'contracts/WeightedPoolFactory.sol:WeightedPoolFactory',
     address: weightedPoolFactoryAddress,
     constructorArguments: [
-      '0x62C9149473fdeE1306847A21c3a9Dfe53726cC1C',
-      '0xa3ABD069778112f3BCF91D591aeE982EAef895bC',
+      '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
+      '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
       BASE_PAUSE_WINDOW_DURATION,
       BASE_BUFFER_PERIOD_DURATION,
     ],

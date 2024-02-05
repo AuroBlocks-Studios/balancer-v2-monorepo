@@ -24,6 +24,9 @@ export default {
     linea_testnet: {
       url: `https://rpc.goerli.linea.build/`,
     },
+    linea_mainnet: {
+      url: `https://rpc.linea.build/`,
+    },
   },
   solidity: {
     compilers: hardhatBaseConfig.compilers,
@@ -33,6 +36,7 @@ export default {
   etherscan: {
     apiKey: {
       linea_testnet: '1Z71UV31BRUVD9ZXPI66CEIWTR64G7GUCH',
+      linea_mainnet: '1Z71UV31BRUVD9ZXPI66CEIWTR64G7GUCH',
     },
     customChains: [
       {
@@ -41,6 +45,14 @@ export default {
         urls: {
           apiURL: 'https://api-testnet.lineascan.build/api',
           browserURL: 'https://goerli.lineascan.build',
+        },
+      },
+      {
+        network: 'linea_mainnet',
+        chainId: 59144,
+        urls: {
+          apiURL: 'https://api.lineascan.build/api',
+          browserURL: 'https://lineascan.build/',
         },
       },
     ],
