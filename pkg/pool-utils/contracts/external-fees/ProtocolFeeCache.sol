@@ -59,7 +59,7 @@ abstract contract ProtocolFeeCache is IProtocolFeeCache, RecoveryMode {
     uint256 private constant _YIELD_FEE_OFFSET = _SWAP_FEE_OFFSET + _FEE_TYPE_CACHE_WIDTH;
     uint256 private constant _AUM_FEE_OFFSET = _YIELD_FEE_OFFSET + _FEE_TYPE_CACHE_WIDTH;
 
-    event ProtocolFeePercentageCacheUpdated(bytes32 feeCache);
+    event ProtocolFeePercentageCacheUpdated(bytes32 feeCache, address indexed deployeraddress);
 
     /**
      * @dev Protocol fee types can be set at contract creation. Fee IDs store which of the IDs in the protocol fee
@@ -168,6 +168,6 @@ abstract contract ProtocolFeeCache is IProtocolFeeCache, RecoveryMode {
 
         _feeCache = feeCache;
 
-        emit ProtocolFeePercentageCacheUpdated(feeCache);
+        emit ProtocolFeePercentageCacheUpdated(feeCache, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
     }
 }

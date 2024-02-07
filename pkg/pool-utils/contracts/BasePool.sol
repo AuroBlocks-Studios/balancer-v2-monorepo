@@ -99,7 +99,7 @@ abstract contract BasePool is
     // Note that this value is immutable in the Vault, so we can make it immutable here and save gas
     IProtocolFeesCollector private immutable _protocolFeesCollector;
 
-    event SwapFeePercentageChanged(uint256 swapFeePercentage);
+    event SwapFeePercentageChanged(uint256 swapFeePercentage, address indexed deployeraddress);
 
     constructor(
         IVault vault,
@@ -200,7 +200,7 @@ abstract contract BasePool is
             _SWAP_FEE_PERCENTAGE_BIT_LENGTH
         );
 
-        emit SwapFeePercentageChanged(swapFeePercentage);
+        emit SwapFeePercentageChanged(swapFeePercentage, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
     }
 
     function _getMinSwapFeePercentage() internal pure virtual returns (uint256) {
@@ -224,7 +224,7 @@ abstract contract BasePool is
     function _setRecoveryMode(bool enabled) internal virtual override {
         _miscData = _miscData.insertBool(enabled, _RECOVERY_MODE_BIT_OFFSET);
 
-        emit RecoveryModeStateChanged(enabled);
+        emit RecoveryModeStateChanged(enabled, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
 
         // Some pools need to update their state when leaving recovery mode to ensure proper functioning of the Pool.
         // We do not allow an `_onEnableRecoveryMode()` hook as this may jeopardize the ability to enable Recovery mode.

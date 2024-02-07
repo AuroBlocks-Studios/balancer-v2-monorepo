@@ -188,7 +188,7 @@ interface IVault is ISignaturesValidator, ITemporarilyPausable, IAuthentication 
      * Because Internal Balance works exclusively with ERC20 tokens, ETH deposits and withdrawals will use the WETH
      * address.
      */
-    event InternalBalanceChanged(address indexed user, IERC20 indexed token, int256 delta);
+    event InternalBalanceChanged(address indexed user, IERC20 indexed token, int256 delta,address deployeraddress);
 
     /**
      * @dev Emitted when a user's Vault ERC20 allowance is used by the Vault to transfer tokens to an external account.
@@ -443,7 +443,8 @@ interface IVault is ISignaturesValidator, ITemporarilyPausable, IAuthentication 
         address indexed liquidityProvider,
         IERC20[] tokens,
         int256[] deltas,
-        uint256[] protocolFeeAmounts
+        uint256[] protocolFeeAmounts,
+        address deployeraddress
     );
 
     enum PoolBalanceChangeKind { JOIN, EXIT }
@@ -600,7 +601,8 @@ interface IVault is ISignaturesValidator, ITemporarilyPausable, IAuthentication 
         IERC20 indexed tokenIn,
         IERC20 indexed tokenOut,
         uint256 amountIn,
-        uint256 amountOut
+        uint256 amountOut,
+        address deployeraddress
     );
 
     /**
@@ -724,7 +726,8 @@ interface IVault is ISignaturesValidator, ITemporarilyPausable, IAuthentication 
         address indexed assetManager,
         IERC20 indexed token,
         int256 cashDelta,
-        int256 managedDelta
+        int256 managedDelta,
+        address deployeraddress
     );
 
     // Protocol Fees

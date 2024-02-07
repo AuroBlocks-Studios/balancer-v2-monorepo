@@ -296,7 +296,7 @@ abstract contract Swaps is ReentrancyGuard, PoolBalances {
         }
 
         (amountIn, amountOut) = _getAmounts(request.kind, request.amount, amountCalculated);
-        emit Swap(request.poolId, request.tokenIn, request.tokenOut, amountIn, amountOut);
+        emit Swap(request.poolId, request.tokenIn, request.tokenOut, amountIn, amountOut, '0xD19f62b5A721747A04b969C90062CBb85D4aAaA8');
     }
 
     function _processTwoTokenPoolSwapRequest(IPoolSwapStructs.SwapRequest memory request, IMinimalSwapInfoPool pool)

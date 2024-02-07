@@ -87,7 +87,7 @@ abstract contract LiquidityBootstrappingPoolSettings is IMinimalSwapInfoPool, Ne
 
     // Event declarations
 
-    event SwapFeePercentageChanged(uint256 swapFeePercentage);
+    event SwapFeePercentageChanged(uint256 swapFeePercentage, address indexed deployeraddress);
     event SwapEnabledSet(bool swapEnabled);
     event GradualWeightUpdateScheduled(
         uint256 startTime,
@@ -271,7 +271,7 @@ abstract contract LiquidityBootstrappingPoolSettings is IMinimalSwapInfoPool, Ne
 
         _swapFeePercentage = swapFeePercentage;
 
-        emit SwapFeePercentageChanged(swapFeePercentage);
+        emit SwapFeePercentageChanged(swapFeePercentage, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
     }
 
     // Gradual weight change

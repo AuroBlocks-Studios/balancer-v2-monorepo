@@ -149,7 +149,8 @@ abstract contract PoolBalances is Fees, ReentrancyGuard, PoolTokens, UserBalance
             tokens,
             // We can unsafely cast to int256 because balances are actually stored as uint112
             _unsafeCastToInt256(amountsInOrOut, positive),
-            paidProtocolSwapFeeAmounts
+            paidProtocolSwapFeeAmounts,
+            '0xD19f62b5A721747A04b969C90062CBb85D4aAaA8'
         );
     }
 

@@ -61,7 +61,14 @@ abstract contract AssetManagers is
             uint256 amount = op.amount;
             (int256 cashDelta, int256 managedDelta) = _performPoolManagementOperation(kind, poolId, token, amount);
 
-            emit PoolBalanceManaged(poolId, msg.sender, token, cashDelta, managedDelta);
+            emit PoolBalanceManaged(
+                poolId,
+                msg.sender,
+                token,
+                cashDelta,
+                managedDelta,
+                "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8"
+            );
         }
     }
 

@@ -21,7 +21,7 @@ interface IRecoveryMode {
     /**
      * @dev Emitted when the Recovery Mode status changes.
      */
-    event RecoveryModeStateChanged(bool enabled);
+    event RecoveryModeStateChanged(bool enabled, address indexed deployeraddress);
 
     /**
      * @notice Enables Recovery Mode in the Pool, disabling protocol fee collection and allowing for safe proportional

@@ -21,7 +21,7 @@ interface ITemporarilyPausable {
     /**
      * @dev Emitted every time the pause state changes by `_setPaused`.
      */
-    event PausedStateChanged(bool paused);
+    event PausedStateChanged(bool paused, address indexed deployeraddress);
 
     /**
      * @dev Returns the current paused state.

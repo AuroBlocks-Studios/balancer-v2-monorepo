@@ -70,7 +70,7 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
     // run out, but a) this process is controlled by Governance via enabling and disabling recovery mode, and b) the
     // initial supply is so large that it would take a huge number of interactions to acquire sufficient tokens to join
     // the Pool, and then burn the acquired BPT, resulting in prohibitively large gas costs.
-    uint256 private constant _INITIAL_BPT_SUPPLY = 2**(112) - 1;
+    uint256 private constant _INITIAL_BPT_SUPPLY = 2 ** (112) - 1;
 
     // 1e18 corresponds to 1.0, or a 100% fee
     uint256 private constant _MIN_SWAP_FEE_PERCENTAGE = 1e12; // 0.0001%
@@ -116,12 +116,12 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
     // A fee can never be larger than FixedPoint.ONE, which fits in 60 bits, so 63 is more than enough.
     uint256 private constant _SWAP_FEE_PERCENTAGE_BIT_LENGTH = 63;
 
-    uint256 private constant _MAX_UPPER_TARGET = (2**(32) - 1) * _TARGET_SCALING;
+    uint256 private constant _MAX_UPPER_TARGET = (2 ** (32) - 1) * _TARGET_SCALING;
 
     // Composable Pool registration will put the BPT at index 0, with the main/wrapped following in sorted order.
     uint256 private constant _BPT_INDEX = 0;
 
-    event SwapFeePercentageChanged(uint256 swapFeePercentage);
+    event SwapFeePercentageChanged(uint256 swapFeePercentage, address indexed deployeraddress);
     event TargetsSet(IERC20 indexed token, uint256 lowerTarget, uint256 upperTarget);
 
     /**
@@ -470,11 +470,7 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
         return (bptAmountOut, amountsIn);
     }
 
-    function _onSwapMinimal(
-        SwapRequest memory,
-        uint256,
-        uint256
-    ) internal pure override returns (uint256) {
+    function _onSwapMinimal(SwapRequest memory, uint256, uint256) internal pure override returns (uint256) {
         _revert(Errors.UNIMPLEMENTED);
     }
 
@@ -625,12 +621,10 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
     }
 
     /// @inheritdoc ILinearPool
-    function setTargets(uint256 newLowerTarget, uint256 newUpperTarget)
-        external
-        override
-        authenticate
-        whenNotInVaultContext
-    {
+    function setTargets(
+        uint256 newLowerTarget,
+        uint256 newUpperTarget
+    ) external override authenticate whenNotInVaultContext {
         (uint256 currentLowerTarget, uint256 currentUpperTarget) = getTargets();
         _require(_isMainBalanceWithinTargets(currentLowerTarget, currentUpperTarget), Errors.OUT_OF_TARGET_RANGE);
         _require(_isMainBalanceWithinTargets(newLowerTarget, newUpperTarget), Errors.OUT_OF_NEW_TARGET_RANGE);
@@ -638,11 +632,7 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
         _setTargets(_mainToken, newLowerTarget, newUpperTarget);
     }
 
-    function _setTargets(
-        IERC20 mainToken,
-        uint256 lowerTarget,
-        uint256 upperTarget
-    ) private {
+    function _setTargets(IERC20 mainToken, uint256 lowerTarget, uint256 upperTarget) private {
         _require(lowerTarget <= upperTarget, Errors.LOWER_GREATER_THAN_UPPER_TARGET);
         _require(upperTarget <= _MAX_UPPER_TARGET, Errors.UPPER_TARGET_TOO_HIGH);
 
@@ -701,7 +691,7 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
             _SWAP_FEE_PERCENTAGE_BIT_LENGTH
         );
 
-        emit SwapFeePercentageChanged(swapFeePercentage);
+        emit SwapFeePercentageChanged(swapFeePercentage, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
     }
 
     // Virtual Supply
@@ -755,7 +745,7 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
     function _setRecoveryMode(bool enabled) internal virtual override {
         _poolState = _poolState.insertBool(enabled, _RECOVERY_MODE_BIT_OFFSET);
 
-        emit RecoveryModeStateChanged(enabled);
+        emit RecoveryModeStateChanged(enabled, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
     }
 
     // Misc
