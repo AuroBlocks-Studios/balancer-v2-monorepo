@@ -691,7 +691,7 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
             _SWAP_FEE_PERCENTAGE_BIT_LENGTH
         );
 
-        emit SwapFeePercentageChanged(swapFeePercentage, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit SwapFeePercentageChanged(swapFeePercentage, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 
     // Virtual Supply
@@ -745,7 +745,7 @@ abstract contract LinearPool is ILinearPool, IGeneralPool, IRateProvider, NewBas
     function _setRecoveryMode(bool enabled) internal virtual override {
         _poolState = _poolState.insertBool(enabled, _RECOVERY_MODE_BIT_OFFSET);
 
-        emit RecoveryModeStateChanged(enabled, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit RecoveryModeStateChanged(enabled, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 
     // Misc

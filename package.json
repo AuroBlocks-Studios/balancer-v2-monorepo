@@ -32,5 +32,8 @@
   "workspaces": [
     "pkg/*",
     "pvt/*"
-  ]
+  ],
+  "dependencies": {
+    "ethers": "^6.8.0"
+  }
 }

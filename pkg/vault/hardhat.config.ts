@@ -24,8 +24,8 @@ export default {
       allowUnlimitedContractSize: true,
     },
     obscuro: {
-      url: 'https://testnet.ten.xyz/v1/query/?token=afc3f08ccdeadbb08f44d6ac25c2d18aef755402&a=0xD19f62b5A721747A04b969C90062CBb85D4aAaA8',
-      accounts: [],
+      url: 'https://testnet.ten.xyz/v1/',
+      accounts: ['0x7bc017153d44911bbb2e295d32b6ce0426fa50be6530d0e8a7cde322390882df'],
     },
   },
 };

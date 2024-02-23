@@ -5,10 +5,12 @@ const BASE_PAUSE_WINDOW_DURATION = MONTH * 3;
 const BASE_BUFFER_PERIOD_DURATION = MONTH;
 async function main() {
   // Deploying the CustomToken contract
+  const vault = '0x9140084f70C3DF3ed0Cf7a13c7617CC7a45C3E25';
+  const protocolFeePercentagesProvider = '0xd69300d71133cedba6b317D16A67aa794D57e5C9';
   const WeightedPoolFactory = await hre.ethers.getContractFactory('WeightedPoolFactory');
   const weightedPoolFactory = await WeightedPoolFactory.deploy(
-    '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
-    '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
+    vault,
+    protocolFeePercentagesProvider,
     BASE_PAUSE_WINDOW_DURATION,
     BASE_BUFFER_PERIOD_DURATION
   );
@@ -43,16 +45,16 @@ async function main() {
   //     2592000,
   //     "0x0000000000000000000000000000000000000000",
   //   ];
-  await hre.run('verify:verify', {
-    contract: 'contracts/WeightedPoolFactory.sol:WeightedPoolFactory',
-    address: weightedPoolFactoryAddress,
-    constructorArguments: [
-      '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
-      '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
-      BASE_PAUSE_WINDOW_DURATION,
-      BASE_BUFFER_PERIOD_DURATION,
-    ],
-  });
+  // await hre.run('verify:verify', {
+  //   contract: 'contracts/WeightedPoolFactory.sol:WeightedPoolFactory',
+  //   address: weightedPoolFactoryAddress,
+  //   constructorArguments: [
+  //     '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
+  //     '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
+  //     BASE_PAUSE_WINDOW_DURATION,
+  //     BASE_BUFFER_PERIOD_DURATION,
+  //   ],
+  // });
 }
 
 main()

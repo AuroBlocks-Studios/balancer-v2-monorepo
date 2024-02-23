@@ -1,19 +1,18 @@
 import hre from 'hardhat';
 import { MONTH } from '@balancer-labs/v2-helpers/src/time';
 
-const BASE_PAUSE_WINDOW_DURATION = MONTH * 3;
-const BASE_BUFFER_PERIOD_DURATION = MONTH;
+const vaultAddress = '0x9140084f70C3DF3ed0Cf7a13c7617CC7a45C3E25';
 async function main() {
   // Deploying the CustomToken contract
   const ProtocolFeePercentagesProvider = await hre.ethers.getContractFactory('ProtocolFeePercentagesProvider');
-  // const protocolFeePercentagesProvider = await ProtocolFeePercentagesProvider.deploy(
-  //   '0x62C9149473fdeE1306847A21c3a9Dfe53726cC1C',
-  //   '500000000000000000',
-  //   '500000000000000000'
-  // );
+  const protocolFeePercentagesProvider = await ProtocolFeePercentagesProvider.deploy(
+    vaultAddress,
+    '500000000000000000',
+    '500000000000000000'
+  );
 
-  // await protocolFeePercentagesProvider.deployed();
-  const protocolFeePercentagesProviderAddress = '0xa3ABD069778112f3BCF91D591aeE982EAef895bC';
+  const protocolFeePercentagesProviderAddress = await protocolFeePercentagesProvider.getAddress();
+  // const protocolFeePercentagesProviderAddress = '0xa3ABD069778112f3BCF91D591aeE982EAef895bC';
   // const tokenAddress = "0x4F6A4C51304758c6258a13e8BD9A600440173D74";
   console.log('CustomToken deployed to:', protocolFeePercentagesProviderAddress);
   // add verification script here
@@ -42,11 +41,11 @@ async function main() {
   //     2592000,
   //     "0x0000000000000000000000000000000000000000",
   //   ];
-  await hre.run('verify:verify', {
-    contract: 'contracts/ProtocolFeePercentagesProvider.sol:ProtocolFeePercentagesProvider',
-    address: protocolFeePercentagesProviderAddress,
-    constructorArguments: ['0x62C9149473fdeE1306847A21c3a9Dfe53726cC1C', '500000000000000000', '500000000000000000'],
-  });
+  // await hre.run('verify:verify', {
+  //   contract: 'contracts/ProtocolFeePercentagesProvider.sol:ProtocolFeePercentagesProvider',
+  //   address: protocolFeePercentagesProviderAddress,
+  //   constructorArguments: ['0x62C9149473fdeE1306847A21c3a9Dfe53726cC1C', '500000000000000000', '500000000000000000'],
+  // });
 }
 
 main()

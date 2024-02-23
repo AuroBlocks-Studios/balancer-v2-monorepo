@@ -67,7 +67,7 @@ abstract contract AssetManagers is
                 token,
                 cashDelta,
                 managedDelta,
-                "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8"
+                address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8)
             );
         }
     }

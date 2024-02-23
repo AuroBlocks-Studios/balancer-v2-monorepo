@@ -78,7 +78,7 @@ abstract contract RecoveryMode is IRecoveryMode, BasePoolAuthorization {
 
         _setRecoveryMode(true);
 
-        emit RecoveryModeStateChanged(true, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit RecoveryModeStateChanged(true, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 
     /**
@@ -94,7 +94,7 @@ abstract contract RecoveryMode is IRecoveryMode, BasePoolAuthorization {
 
         _setRecoveryMode(false);
 
-        emit RecoveryModeStateChanged(false, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit RecoveryModeStateChanged(false, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 
     // Defer implementation for functions that require storage

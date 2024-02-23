@@ -8,21 +8,23 @@ const BaseVersion = { version: 4, deployment: '20230320-composable-stable-pool-v
 const factoryVersion = JSON.stringify({ name: 'ComposableStablePoolFactory', ...BaseVersion });
 const poolVersion = JSON.stringify({ name: 'ComposableStablePool', ...BaseVersion });
 async function main() {
+  const vault = '0x9140084f70C3DF3ed0Cf7a13c7617CC7a45C3E25';
+  const protocolFeePercentagesProvider = '0xd69300d71133cedba6b317D16A67aa794D57e5C9';
   // Deploying the CustomToken contract
-  // const ComposableStablePoolFactory = await hre.ethers.getContractFactory('ComposableStablePoolFactory');
-  // const composableStablePoolFactory = await ComposableStablePoolFactory.deploy(
-  //   '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
-  //   '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
-  //   factoryVersion,
-  //   poolVersion,
-  //   BASE_PAUSE_WINDOW_DURATION,
-  //   BASE_BUFFER_PERIOD_DURATION
-  // );
+  const ComposableStablePoolFactory = await hre.ethers.getContractFactory('ComposableStablePoolFactory');
+  const composableStablePoolFactory = await ComposableStablePoolFactory.deploy(
+    vault,
+    protocolFeePercentagesProvider,
+    factoryVersion,
+    poolVersion,
+    BASE_PAUSE_WINDOW_DURATION,
+    BASE_BUFFER_PERIOD_DURATION
+  );
 
   // await composableStablePoolFactory.deployed();
-  // const composableStablePoolFactoryAddress = composableStablePoolFactory.address;
+  const composableStablePoolFactoryAddress = await composableStablePoolFactory.getAddress();
   // const tokenAddress = "0x4F6A4C51304758c6258a13e8BD9A600440173D74";
-  // console.log('ComposableStablePoolFactory deployed to:', composableStablePoolFactoryAddress);
+  console.log('ComposableStablePoolFactory deployed to:', composableStablePoolFactoryAddress);
   // add verification script here
   // const contractAddress = "0xe2D523Bffd6A81BbbBDD370f8308DE4e8D1671b4"; // Replace with the address of your deployed contract
   //   const newWeightedPoolParams = {
@@ -61,59 +63,59 @@ async function main() {
   //     BASE_BUFFER_PERIOD_DURATION,
   //   ],
   // });
-  const newWeightedPoolParams = {
-    name: 'Chimp USDC-DAI-USDT Stable Pool',
-    symbol: 'USDC-DAI-USDT',
-    tokens: [
-      '0x176211869cA2b568f2A7D4EE941E073a821EE1ff',
-      '0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5',
-      '0xA219439258ca9da29E9Cc4cE5596924745e12B93',
-    ],
-    amplificationParameter: '2000',
-    rateProviders: [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-    ],
-    tokenRateCacheDurations: ['21600', '21600', '21600'],
-    exemptFromYieldProtocolFeeFlags: [false, false, false],
-    swapFeePercentage: '500000000000000',
-    owner: '0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B',
-    salt: '0x0000000000000000000000000000000000000000000000000000000000000000',
-  };
+  // const newWeightedPoolParams = {
+  //   name: 'Chimp USDC-DAI-USDT Stable Pool',
+  //   symbol: 'USDC-DAI-USDT',
+  //   tokens: [
+  //     '0x176211869cA2b568f2A7D4EE941E073a821EE1ff',
+  //     '0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5',
+  //     '0xA219439258ca9da29E9Cc4cE5596924745e12B93',
+  //   ],
+  //   amplificationParameter: '2000',
+  //   rateProviders: [
+  //     '0x0000000000000000000000000000000000000000',
+  //     '0x0000000000000000000000000000000000000000',
+  //     '0x0000000000000000000000000000000000000000',
+  //   ],
+  //   tokenRateCacheDurations: ['21600', '21600', '21600'],
+  //   exemptFromYieldProtocolFeeFlags: [false, false, false],
+  //   swapFeePercentage: '500000000000000',
+  //   owner: '0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B',
+  //   salt: '0x0000000000000000000000000000000000000000000000000000000000000000',
+  // };
 
-  const args = [
-    {
-      vault: '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
-      protocolFeeProvider: '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
-      name: 'Chimp USDC-DAI-USDT Stable Pool',
-      symbol: 'USDC-DAI-USDT',
-      tokens: [
-        '0x176211869cA2b568f2A7D4EE941E073a821EE1ff',
-        '0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5',
-        '0xA219439258ca9da29E9Cc4cE5596924745e12B93',
-      ],
-      rateProviders: [
-        '0x0000000000000000000000000000000000000000',
-        '0x0000000000000000000000000000000000000000',
-        '0x0000000000000000000000000000000000000000',
-      ],
-      tokenRateCacheDurations: ['21600', '21600', '21600'],
-      exemptFromYieldProtocolFeeFlags: [false, false, false],
-      amplificationParameter: '2000',
-      swapFeePercentage: '500000000000000',
-      pauseWindowDuration: BASE_PAUSE_WINDOW_DURATION,
-      bufferPeriodDuration: BASE_BUFFER_PERIOD_DURATION,
-      owner: '0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B',
-      version: poolVersion,
-      // ...newWeightedPoolParams,
-    },
-  ];
-  await hre.run('verify:verify', {
-    contract: 'contracts/ComposableStablePool.sol:ComposableStablePool',
-    address: '0x90d8053f7e29faaf5189bdce796a516e29f1f5d3',
-    constructorArguments: args,
-  });
+  // const args = [
+  //   {
+  //     vault: '0x286381aEdd20e51f642fE4A200B5CB2Fe3729695',
+  //     protocolFeeProvider: '0xd69300d71133cedba6b317D16A67aa794D57e5C9',
+  //     name: 'Chimp USDC-DAI-USDT Stable Pool',
+  //     symbol: 'USDC-DAI-USDT',
+  //     tokens: [
+  //       '0x176211869cA2b568f2A7D4EE941E073a821EE1ff',
+  //       '0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5',
+  //       '0xA219439258ca9da29E9Cc4cE5596924745e12B93',
+  //     ],
+  //     rateProviders: [
+  //       '0x0000000000000000000000000000000000000000',
+  //       '0x0000000000000000000000000000000000000000',
+  //       '0x0000000000000000000000000000000000000000',
+  //     ],
+  //     tokenRateCacheDurations: ['21600', '21600', '21600'],
+  //     exemptFromYieldProtocolFeeFlags: [false, false, false],
+  //     amplificationParameter: '2000',
+  //     swapFeePercentage: '500000000000000',
+  //     pauseWindowDuration: BASE_PAUSE_WINDOW_DURATION,
+  //     bufferPeriodDuration: BASE_BUFFER_PERIOD_DURATION,
+  //     owner: '0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B',
+  //     version: poolVersion,
+  //     // ...newWeightedPoolParams,
+  //   },
+  // ];
+  // await hre.run('verify:verify', {
+  //   contract: 'contracts/ComposableStablePool.sol:ComposableStablePool',
+  //   address: '0x90d8053f7e29faaf5189bdce796a516e29f1f5d3',
+  //   constructorArguments: args,
+  // });
 }
 
 main()

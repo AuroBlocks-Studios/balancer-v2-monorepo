@@ -183,7 +183,7 @@ abstract contract UserBalance is ReentrancyGuard, AssetTransfersHandler, VaultAu
      */
     function _setInternalBalance(address account, IERC20 token, uint256 newBalance, int256 delta) private {
         _internalTokenBalance[account][token] = newBalance;
-        emit InternalBalanceChanged(account, token, delta, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit InternalBalanceChanged(account, token, delta, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 
     /**

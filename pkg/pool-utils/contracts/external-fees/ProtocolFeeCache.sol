@@ -168,6 +168,6 @@ abstract contract ProtocolFeeCache is IProtocolFeeCache, RecoveryMode {
 
         _feeCache = feeCache;
 
-        emit ProtocolFeePercentageCacheUpdated(feeCache, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit ProtocolFeePercentageCacheUpdated(feeCache, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 }

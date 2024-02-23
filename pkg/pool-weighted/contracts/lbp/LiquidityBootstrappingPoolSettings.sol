@@ -271,7 +271,7 @@ abstract contract LiquidityBootstrappingPoolSettings is IMinimalSwapInfoPool, Ne
 
         _swapFeePercentage = swapFeePercentage;
 
-        emit SwapFeePercentageChanged(swapFeePercentage, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit SwapFeePercentageChanged(swapFeePercentage, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 
     // Gradual weight change

@@ -96,7 +96,7 @@ abstract contract TemporarilyPausable is ITemporarilyPausable {
         }
 
         _paused = paused;
-        emit PausedStateChanged(paused, "0xD19f62b5A721747A04b969C90062CBb85D4aAaA8");
+        emit PausedStateChanged(paused, address(0xD19f62b5A721747A04b969C90062CBb85D4aAaA8));
     }
 
     /**

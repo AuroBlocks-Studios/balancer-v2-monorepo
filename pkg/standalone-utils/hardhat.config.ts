@@ -2,6 +2,7 @@ import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-waffle';
 import 'hardhat-ignore-warnings';
 import '@nomicfoundation/hardhat-verify';
+import 'ten-hardhat-plugin';
 
 import { hardhatBaseConfig } from '@balancer-labs/v2-common';
 import { name } from './package.json';
@@ -27,6 +28,10 @@ export default {
     },
     linea_testnet: {
       url: `https://rpc.goerli.linea.build/`,
+    },
+    obscuro: {
+      url: 'https://testnet.ten.xyz/v1/',
+      accounts: ['0x7bc017153d44911bbb2e295d32b6ce0426fa50be6530d0e8a7cde322390882df'],
     },
   },
   warnings: hardhatBaseConfig.warnings,

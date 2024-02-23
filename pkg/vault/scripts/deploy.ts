@@ -2,12 +2,10 @@ import hre from 'hardhat';
 
 async function main() {
   // Deploying the CustomToken contract
+  console.log('deploying conytract');
   const AuthorizerFactory = await hre.ethers.getContractFactory('Authorizer');
   const authorizerFactory = await AuthorizerFactory.deploy('0xD19f62b5A721747A04b969C90062CBb85D4aAaA8');
-
-  await authorizerFactory.deployed();
-  const authorizerFactoryAddress = authorizerFactory.address;
-  console.log('authorizerFactory deployed to:', authorizerFactoryAddress);
+  console.log('authorizerFactory', authorizerFactory.getAddress());
 }
 
 main()
