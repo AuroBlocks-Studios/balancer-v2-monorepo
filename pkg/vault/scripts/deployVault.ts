@@ -20,7 +20,7 @@ async function main() {
     vaultAddress // The deployed contract address
   );
   console.log('contract', contract);
-  const feeCollector = await contract.getProtocolFeesCollector();
+  const feeCollector = await contract.WETH();
   console.log('contract', feeCollector);
 }
 

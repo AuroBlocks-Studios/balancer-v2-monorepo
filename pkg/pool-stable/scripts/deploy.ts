@@ -9,7 +9,7 @@ const factoryVersion = JSON.stringify({ name: 'ComposableStablePoolFactory', ...
 const poolVersion = JSON.stringify({ name: 'ComposableStablePool', ...BaseVersion });
 async function main() {
   const vault = '0x9140084f70C3DF3ed0Cf7a13c7617CC7a45C3E25';
-  const protocolFeePercentagesProvider = '0xd69300d71133cedba6b317D16A67aa794D57e5C9';
+  const protocolFeePercentagesProvider = '0x37942ebb65b02DcC02d9b6F2b2C2CB3F95DdbA61';
   // Deploying the CustomToken contract
   const ComposableStablePoolFactory = await hre.ethers.getContractFactory('ComposableStablePoolFactory');
   const composableStablePoolFactory = await ComposableStablePoolFactory.deploy(
@@ -18,7 +18,8 @@ async function main() {
     factoryVersion,
     poolVersion,
     BASE_PAUSE_WINDOW_DURATION,
-    BASE_BUFFER_PERIOD_DURATION
+    BASE_BUFFER_PERIOD_DURATION,
+    { gasLimit: 300000000 }
   );
 
   // await composableStablePoolFactory.deployed();
